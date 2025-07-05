@@ -1,6 +1,155 @@
 package Modelo;
 
-public class Mascota 
-{
-    
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
+public class Mascota {
+    int idMascota;
+    String nombre;
+    String raza;
+ String edad;
+    String peso;
+    String propietarioCedula;
+
+    public Mascota() {
+    }
+
+    public Mascota(int idMascota, String nombre, String raza, String edad, String peso, String propietarioCedula) {
+        this.idMascota = idMascota;
+        this.nombre = nombre;
+        this.raza = raza;
+        this.edad = edad;
+        this.peso = peso;
+        this.propietarioCedula = propietarioCedula;
+    }
+
+    public int getIdMascota() {
+        return idMascota;
+    }
+
+    public void setIdMascota(int idMascota) {
+        this.idMascota = idMascota;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
+
+    public String getPeso() {
+        return peso;
+    }
+
+    public void setPeso(String peso) {
+        this.peso = peso;
+    }
+
+    public String getPropietarioCedula() {
+        return propietarioCedula;
+    }
+
+    public void setPropietarioCedula(String propietarioCedula) {
+        this.propietarioCedula = propietarioCedula;
+    }
+
+
+    public void crearMascota() {
+        try {
+            ConectarBD conexion = new ConectarBD();
+            String instruccion = "INSERT INTO mascota (idMascota, nombre, raza, edad, peso, Propietario_cedula) VALUES (?, ?, ?, ?, ?, ?)";
+            conexion.sentencia = conexion.getConexion().prepareStatement(instruccion);
+            conexion.sentencia.setInt(1, getIdMascota());
+            conexion.sentencia.setString(2, getNombre());
+            conexion.sentencia.setString(3, getRaza());
+            conexion.sentencia.setString(4, getEdad());
+            conexion.sentencia.setString(5, getPeso());
+            conexion.sentencia.setString(6, getPropietarioCedula());
+            conexion.sentencia.execute();
+            JOptionPane.showMessageDialog(null, "Mascota registrada correctamente.");
+            conexion.getConexion().close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error SQL: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public String[] buscarMascota(int id, String[] datos) {
+        try {
+            ConectarBD conexion = new ConectarBD();
+            Statement sentencia = conexion.getConexion().createStatement();
+            ResultSet resultado = sentencia.executeQuery("SELECT * FROM mascota WHERE idMascota=" + id);
+            if (resultado.next()) {
+                datos[0] = resultado.getString("nombre");
+                datos[1] = resultado.getString("raza");
+                datos[2] = resultado.getString("edad");
+                datos[3] = resultado.getString("peso");
+                datos[4] = resultado.getString("Propietario_cedula");
+            } else {
+                JOptionPane.showMessageDialog(null, "Mascota no encontrada.");
+            }
+            resultado.close();
+            conexion.getConexion().close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return datos;
+    }
+
+   
+    public void actualizarMascota() {
+        try {
+            ConectarBD conexion = new ConectarBD();
+            String instruccion = "UPDATE mascota SET nombre=?, raza=?, edad=?, peso=?, Propietario_cedula=? WHERE idMascota=?";
+            conexion.sentencia = conexion.getConexion().prepareStatement(instruccion);
+            conexion.sentencia.setString(1, getNombre());
+            conexion.sentencia.setString(2, getRaza());
+            conexion.sentencia.setString(3, getEdad());
+            conexion.sentencia.setString(4, getPeso());
+            conexion.sentencia.setString(5, getPropietarioCedula());
+            conexion.sentencia.setInt(6, getIdMascota());
+            conexion.sentencia.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Mascota actualizada correctamente.");
+            conexion.getConexion().close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error SQL: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    public void eliminarMascota(int id) {
+        int confirm = JOptionPane.showConfirmDialog(null, "¿Eliminar esta mascota?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                ConectarBD conexion = new ConectarBD();
+                String instruccion = "DELETE FROM mascota WHERE idMascota=?";
+                conexion.sentencia = conexion.getConexion().prepareStatement(instruccion);
+                conexion.sentencia.setInt(1, id);
+                conexion.sentencia.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Mascota eliminada correctamente.");
+                conexion.getConexion().close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error SQL: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 }

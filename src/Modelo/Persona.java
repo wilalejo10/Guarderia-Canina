@@ -2,19 +2,19 @@ package Modelo;
 
 public class Persona 
 {
-    String nombre, cedula, telefono;
-    int edad;
+    String nombre, telefono,cedula;
+  
     
     public Persona()
     {
     }
     
-    public Persona(String nombre, String cedula, String telefono, int edad)
+    public Persona(String nombre, String cedula, String telefono)
     {
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
-        this.edad = edad;
+        
     }
 
     public String getNombre() 
@@ -47,13 +47,4 @@ public class Persona
         this.telefono = telefono;
     }
 
-    public int getEdad() 
-    {
-        return edad;
-    }
-
-    public void setEdad(int edad) 
-    {
-        this.edad = edad;
-    }  
 }
