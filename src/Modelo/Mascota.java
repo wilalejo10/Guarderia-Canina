@@ -1,5 +1,6 @@
 package Modelo;
 
+import com.mysql.jdbc.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -74,24 +75,24 @@ public class Mascota {
     }
 
 
-    public void crearMascota() {
-        try {
-            ConectarBD conexion = new ConectarBD();
-            String instruccion = "INSERT INTO mascota (idMascota, nombre, raza, edad, peso, Propietario_cedula) VALUES (?, ?, ?, ?, ?, ?)";
-            conexion.sentencia = conexion.getConexion().prepareStatement(instruccion);
-            conexion.sentencia.setInt(1, getIdMascota());
-            conexion.sentencia.setString(2, getNombre());
-            conexion.sentencia.setString(3, getRaza());
-            conexion.sentencia.setString(4, getEdad());
-            conexion.sentencia.setString(5, getPeso());
-            conexion.sentencia.setString(6, getPropietarioCedula());
-            conexion.sentencia.execute();
-            JOptionPane.showMessageDialog(null, "Mascota registrada correctamente.");
-            conexion.getConexion().close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error SQL: " + e, "Error", JOptionPane.ERROR_MESSAGE);
-        }
+public void crearMascota() {
+    try {
+        ConectarBD conexion = new ConectarBD();
+        String instruccion = "INSERT INTO mascota (idMascota, nombre, raza, edad, peso, Propietario_cedula) VALUES (?, ?, ?, ?, ?, ?)";
+        conexion.setSentencia(conexion.getConexion().prepareStatement(instruccion));
+        conexion.getSentencia().setInt(1, idMascota);
+        conexion.getSentencia().setString(2, nombre);
+        conexion.getSentencia().setString(3, raza);
+        conexion.getSentencia().setString(4, edad);
+        conexion.getSentencia().setString(5, peso);
+        conexion.getSentencia().setString(6, propietarioCedula);
+        conexion.getSentencia().execute();
+        conexion.getConexion().close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error SQL al registrar mascota: " + e.getMessage());
     }
+}
+
 
     public String[] buscarMascota(int id, String[] datos) {
         try {
@@ -152,4 +153,8 @@ public class Mascota {
             }
         }
     }
+    
+
+
+    
 }

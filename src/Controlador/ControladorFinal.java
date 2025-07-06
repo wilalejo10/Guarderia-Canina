@@ -56,24 +56,26 @@ public class ControladorFinal implements ActionListener {
         }
 
  
-        if (e.getSource() == vista.getBotonregistrocuidador()) {
-            try {
-                String cedula = vista.getTxtcedulacuidador().getText();
-                String nombre = vista.getTxtnombrecuidador().getText();
-                String telefono = vista.getTelefonocui().getText();
-                int edad = Integer.parseInt(vista.getTxtedadcuidador().getText());
-                String turno = vista.getTxtturnocuidador().getText();
-                String especialidad = vista.getTxtespecialidadcuidador().getText();
-                String cargo = vista.getTxtcargocuidador().getText();
+ if (e.getSource() == vista.getBotonregistrocuidador()) {
+    try {
+        String cedula = vista.getTxtcedulacuidador().getText();
+        String nombre = vista.getTxtnombrecuidador().getText();
+        String telefono = vista.getTelefonocui().getText();
+        int edad = Integer.parseInt(vista.getTxtedadcuidador().getText());
+        String turno = vista.getTxtturnocuidador().getText();
+        String especialidad = vista.getTxtespecialidadcuidador().getText();
+        String cargo = vista.getTxtcargocuidador().getText();
 
-                Cuidador cuidador = new Cuidador(nombre, cedula, telefono, edad, turno, especialidad, cargo);
-           
+      
+        Cuidador cuidador = new Cuidador(nombre, cedula, telefono, edad, turno, especialidad, cargo);
+        cuidador.crearCuidador();
 
-                JOptionPane.showMessageDialog(vista, "Cuidador registrado correctamente");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(vista, "Error al registrar cuidador: " + ex.getMessage());
-            }
-        }
+        JOptionPane.showMessageDialog(vista, "Cuidador registrado correctamente");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al registrar cuidador: " + ex.getMessage());
+    }
+}
+
 
  
         if (e.getSource() == vista.getBotonregistromascota()) {
@@ -112,4 +114,9 @@ public class ControladorFinal implements ActionListener {
             JOptionPane.showMessageDialog(vista, "Función de facturación pendiente");
         }
     }
+    
+    
+    
+    
+    
 }
