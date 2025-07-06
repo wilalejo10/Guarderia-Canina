@@ -136,6 +136,37 @@ public void crearMascota() {
         }
     }
 
+    public static Mascota buscarPorCedulaPropietario(String cedulaPropietario) {
+    Mascota mascota = null;
+    try {
+        ConectarBD conexion = new ConectarBD();
+        String sql = "SELECT * FROM mascota WHERE Propietario_cedula = '" + cedulaPropietario + "' LIMIT 1";
+        Statement stmt = conexion.getConexion().createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        if (rs.next()) {
+            mascota = new Mascota(
+                rs.getInt("idMascota"),
+                rs.getString("nombre"),
+                rs.getString("raza"),
+                rs.getString("edad"),
+                rs.getString("peso"),
+                cedulaPropietario
+            );
+        }
+
+        rs.close();
+        stmt.close();
+        conexion.getConexion().close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al buscar mascota: " + e.getMessage());
+    }
+
+    return mascota;
+}
+
+    
+    
 
     public void eliminarMascota(int id) {
         int confirm = JOptionPane.showConfirmDialog(null, "¿Eliminar esta mascota?", "Confirmación", JOptionPane.YES_NO_OPTION);

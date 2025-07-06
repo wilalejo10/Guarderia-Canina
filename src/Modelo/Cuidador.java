@@ -90,7 +90,7 @@ public class Cuidador extends Persona
         {
             ConectarBD conexion = new ConectarBD();
             Statement sentencia = conexion.getConexion().createStatement();
-            ResultSet resultado = sentencia.executeQuery("SELECT * FROM cuidador WHERE cedula='" + cedulaCuidador + "'");
+            ResultSet resultado = sentencia.executeQuery("SELECT * FROM Cuidador WHERE cedulaCuidador = '" + cedulaCuidador + "'");
             
             if (resultado.next())
             {
@@ -139,6 +139,39 @@ public class Cuidador extends Persona
         }
     }
 
+       public boolean buscarPorCedulaCI(String cedulaBuscada) {
+    try {
+        ConectarBD conexion = new ConectarBD();
+        String sql = "SELECT * FROM Cuidador WHERE cedulaCuidador = '" + cedulaBuscada + "'";
+        Statement stmt = conexion.getConexion().createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        if (rs.next()) {
+            setCedula(rs.getString("cedulaCuidador"));
+            setNombre(rs.getString("nombre"));
+            setTelefono(rs.getString("telefono"));
+            setEdad(rs.getInt("edad"));
+            setTurno(rs.getString("turno"));
+            setEspecialidad(rs.getString("especialidad"));
+            setCargo(rs.getString("cargo"));
+            rs.close();
+            stmt.close();
+            conexion.getConexion().close();
+            return true;
+        } else {
+            return false;
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al buscar cuidador: " + e.getMessage());
+        return false;
+    }
+}
+
+    
+ 
+
+       
+    
     public void eliminarCuidador(String cedulaCuidador)
     {
         int seleccion = JOptionPane.showOptionDialog(null,"¿Desea ELIMINAR EL REGISTRO (Si/No)","Seleccione una opción",

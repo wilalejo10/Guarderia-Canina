@@ -9,6 +9,7 @@ public class Servicio {
     int aforoMaximo;
     int idTipoServicio;
     int disponibles;
+    String tipo;
 
     public Servicio() {
     }
@@ -20,101 +21,94 @@ public class Servicio {
         this.disponibles = disponibles;
     }
 
-
-    public String[] buscarServicio(int id, String[] datos) {
-        try {
-            ConectarBD conexion = new ConectarBD();
-            Statement sentencia = conexion.getConexion().createStatement();
-            ResultSet resultado = sentencia.executeQuery("SELECT * FROM servicio WHERE idservicio=" + id);
-            if (resultado.next()) {
-                datos[0] = String.valueOf(resultado.getInt("aforoMaximo"));
-                datos[1] = String.valueOf(resultado.getInt("idTipoServicio"));
-                datos[2] = String.valueOf(resultado.getInt("disponibles"));
-            } else {
-                JOptionPane.showMessageDialog(null, "Servicio no encontrado.");
-            }
-            resultado.close();
-            conexion.getConexion().close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
-        }
-        return datos;
+    public String getTipo() {
+        return tipo;
     }
 
-    // registrar un nuevo servicio
-    public boolean registrarServicio() {
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+
+    public int getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
+    }
+
+    public int getAforoMaximo() {
+        return aforoMaximo;
+    }
+
+    public void setAforoMaximo(int aforoMaximo) {
+        this.aforoMaximo = aforoMaximo;
+    }
+
+    public int getIdTipoServicio() {
+        return idTipoServicio;
+    }
+
+    public void setIdTipoServicio(int idTipoServicio) {
+        this.idTipoServicio = idTipoServicio;
+    }
+
+    public int getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(int disponibles) {
+        this.disponibles = disponibles;
+    }
+    
+
+    public boolean actualizarDisponibilidad(int id, int nuevaDisponibilidad) {
         try {
             ConectarBD conexion = new ConectarBD();
-            String sql = "INSERT INTO servicio (aforoMaximo, idTipoServicio, disponibles) VALUES (?, ?, ?)";
-            PreparedStatement pst = conexion.getConexion().prepareStatement(sql);
-            pst.setInt(1, aforoMaximo);
-            pst.setInt(2, idTipoServicio);
-            pst.setInt(3, disponibles);
-            pst.executeUpdate();
+            String sql = "UPDATE servicio SET disponibles = ? WHERE idServicio = ?";
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(sql);
+            stmt.setInt(1, nuevaDisponibilidad);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            stmt.close();
             conexion.getConexion().close();
             return true;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar servicio: " + e);
+            JOptionPane.showMessageDialog(null, "Error al actualizar disponibilidad: " + e.getMessage());
             return false;
         }
     }
 
-    // listar servicios
-    public static ArrayList<Servicio> listarServicios() {
-        ArrayList<Servicio> lista = new ArrayList<>();
+    public static Servicio obtenerServicioPorNombre(String nombreServicio) {
+        Servicio s = null;
         try {
             ConectarBD conexion = new ConectarBD();
-            Statement st = conexion.getConexion().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM servicio");
-            while (rs.next()) {
-                Servicio s = new Servicio(
-                    rs.getInt("idservicio"),
-                    rs.getInt("aforoMaximo"),
-                    rs.getInt("idTipoServicio"),
-                    rs.getInt("disponibles")
-                );
-                lista.add(s);
+            String sql = "SELECT s.idServicio, s.aforoMaximo, s.disponibles, t.tipoServicio " +
+                         "FROM servicio s JOIN tipo_de_servicio t ON s.Tipo_de_Servicio_idTipo_de_Servicio = t.idTipo_de_Servicio " +
+                         "WHERE t.tipoServicio = ?";
+            PreparedStatement stmt = conexion.getConexion().prepareStatement(sql);
+            stmt.setString(1, nombreServicio);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                s = new Servicio();
+                s.idServicio = rs.getInt("idServicio");
+                s.aforoMaximo = rs.getInt("aforoMaximo");
+                s.disponibles = rs.getInt("disponibles");
+                s.tipo = rs.getString("tipoServicio");
             }
+
             rs.close();
+            stmt.close();
             conexion.getConexion().close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al listar servicios: " + e);
+            JOptionPane.showMessageDialog(null, "Error al obtener servicio: " + e.getMessage());
         }
-        return lista;
-    }
-
-    // actualizar todos los campos del servicio
-    public boolean actualizarServicio() {
-        try {
-            ConectarBD conexion = new ConectarBD();
-            String sql = "UPDATE servicio SET aforoMaximo=?, idTipoServicio=?, disponibles=? WHERE idservicio=?";
-            PreparedStatement pst = conexion.getConexion().prepareStatement(sql);
-            pst.setInt(1, aforoMaximo);
-            pst.setInt(2, idTipoServicio);
-            pst.setInt(3, disponibles);
-            pst.setInt(4, idServicio);
-            pst.executeUpdate();
-            conexion.getConexion().close();
-            return true;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar servicio: " + e);
-            return false;
-        }
-    }
-
-    // eliminar un servicio
-    public boolean eliminarServicio() {
-        try {
-            ConectarBD conexion = new ConectarBD();
-            String sql = "DELETE FROM servicio WHERE idservicio=?";
-            PreparedStatement pst = conexion.getConexion().prepareStatement(sql);
-            pst.setInt(1, idServicio);
-            pst.executeUpdate();
-            conexion.getConexion().close();
-            return true;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar servicio: " + e);
-            return false;
-        }
+        return s;
     }
 }
+
+
+

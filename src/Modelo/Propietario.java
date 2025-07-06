@@ -6,9 +6,9 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class Propietario extends Persona {
-    private String correo, direccion;
-    private int idMascota;
-    private String nombreMascota;
+     String correo, direccion;
+     int idMascota;
+     String nombreMascota;
 
     public Propietario() {
     }
@@ -49,30 +49,37 @@ public class Propietario extends Persona {
         }
     }
 
-    public String[] buscarPropietario(String cedula, String[] datos) {
-        try {
-            ConectarBD conexion = new ConectarBD();
-            Statement sentencia = conexion.getConexion().createStatement();
-            ResultSet resultado = sentencia.executeQuery("SELECT * FROM Propietario WHERE cedula='" + cedula + "'");
+public String[] buscarPropietario(String cedula, String[] datos) {
+    try {
+        ConectarBD conexion = new ConectarBD();
+        Statement sentencia = conexion.getConexion().createStatement();
+        String sql = "SELECT * FROM Propietario WHERE cedula = '" + cedula + "'";
+        ResultSet resultado = sentencia.executeQuery(sql);
 
-            if (resultado.next()) {
-                datos[0] = resultado.getString("nombre");
-                datos[1] = resultado.getString("direccion");
-                datos[2] = resultado.getString("telefono");
-                datos[3] = resultado.getString("correo");
-                buscarMascotaDePropietario(cedula);
-                datos[4] = getNombreMascota();
-                datos[5] = String.valueOf(getIdMascota());
-            } else {
-                JOptionPane.showMessageDialog(null, "Cliente no encontrado");
-            }
-            resultado.close();
-            conexion.getConexion().close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e, "Información", JOptionPane.ERROR_MESSAGE);
+        if (resultado.next()) {
+            datos[0] = resultado.getString("nombre");
+            datos[1] = resultado.getString("direccion");
+            datos[2] = resultado.getString("telefono");
+            datos[3] = resultado.getString("correo");
+
+            // Buscar datos de la mascota (si tienes este método implementado)
+            buscarMascotaDePropietario(cedula); // método que tú tienes en la clase
+            datos[4] = getNombreMascota();      // nombre de la mascota encontrada
+            datos[5] = String.valueOf(getIdMascota()); // ID convertido a texto
+        } else {
+            JOptionPane.showMessageDialog(null, "Propietario no encontrado");
         }
-        return datos;
+
+        resultado.close();
+        sentencia.close();
+        conexion.getConexion().close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
     }
+
+    return datos;
+}
+
 
     public void actualizarCliente(String cedula) {
         try {
@@ -112,6 +119,38 @@ public class Propietario extends Persona {
         }
     }
 
+
+    public boolean buscarPorCedula(String cedulaBuscada) {
+    try {
+        ConectarBD conexion = new ConectarBD();
+        String sql = "SELECT * FROM Propietario WHERE cedula = '" + cedulaBuscada + "'";
+        Statement stmt = conexion.getConexion().createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        if (rs.next()) {
+            this.setCedula(rs.getString("cedula"));
+            this.setNombre(rs.getString("nombre"));
+            this.setDireccion(rs.getString("direccion"));
+            this.setTelefono(rs.getString("telefono"));
+            this.setCorreo(rs.getString("correo"));
+            rs.close();
+            stmt.close();
+            conexion.getConexion().close();
+            return true;
+        } else {
+            rs.close();
+            stmt.close();
+            conexion.getConexion().close();
+            return false;
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al buscar propietario: " + e.getMessage());
+        return false;
+    }
+}
+
+    
+    
     private void buscarMascotaDePropietario(String cedulaPropietario) {
         try {
             ConectarBD conexion = new ConectarBD();

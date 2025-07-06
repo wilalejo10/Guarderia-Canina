@@ -28,12 +28,14 @@ public class ControladorFinal implements ActionListener {
         vista.getBotonregistrocuidador().addActionListener(this);
         vista.getBotonregistromascota().addActionListener(this);
         vista.getBotonservicio().addActionListener(this);
+        vista.getBtactualizarcuidador().addActionListener(this);
+        vista.getBtBuscarCuidador().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == vista.getBotonregistrocliente()) {
+if (e.getSource() == vista.getBotonregistrocliente()) {
             try {
                 String nombre = vista.getTxtnombre().getText();
                 String cedula = vista.getTxtcedularegistrocliente().getText();
@@ -55,7 +57,51 @@ public class ControladorFinal implements ActionListener {
             }
         }
 
+
+if (e.getSource() == vista.getBotonbuscaractualizacion()) {
+    String cedula = vista.getTxtactualizarcedula().getText().trim();
+
+    if (cedula.isEmpty()) {
+        JOptionPane.showMessageDialog(vista, "Por favor ingrese una cédula para buscar.");
+        return;
+    }
+
+    Propietario p = new Propietario();
+    boolean encontrado = p.buscarPorCedula(cedula); 
+
+    if (encontrado) {
+        
+        vista.getTxtactualizacionnombre().setText(p.getNombre());
+        vista.getTxtactualizaciondireccion().setText(p.getDireccion());
+        vista.getTxtactualizaciontelefono().setText(p.getTelefono());
+        vista.getTxtactualizacioncorreo().setText(p.getCorreo());
+
+    } else {
+        JOptionPane.showMessageDialog(vista, "Propietario no encontrado.");
+    }
+}
+
  
+if (e.getSource() == vista.getBotonactualizacion()) {
+    try {
+      
+        String cedula = vista.getTxtactualizarcedula().getText().trim();
+        String nombre = vista.getTxtactualizacionnombre().getText().trim();
+        String direccion = vista.getTxtactualizaciondireccion().getText().trim();
+        String telefono = vista.getTxtactualizaciontelefono().getText().trim();
+        String correo = vista.getTxtactualizacioncorreo().getText().trim();
+
+        Propietario p = new Propietario(nombre, cedula, telefono, direccion, correo);
+        p.actualizarCliente(cedula); 
+
+        JOptionPane.showMessageDialog(vista, "Datos actualizados correctamente.");
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al actualizar: " + ex.getMessage());
+    }
+}
+ 
+
  if (e.getSource() == vista.getBotonregistrocuidador()) {
     try {
         String cedula = vista.getTxtcedulacuidador().getText();
@@ -77,8 +123,59 @@ public class ControladorFinal implements ActionListener {
 }
 
 
+if (e.getSource() == vista.getBtBuscarCuidador()) {
+    String cedulaCI = vista.getTxtcedulacuidador().getText().trim();
+
+    if (cedulaCI.isEmpty()) {
+        JOptionPane.showMessageDialog(vista, "Por favor ingrese una cédula para buscar.");
+        return;
+    }
+
+    Cuidador cuidador = new Cuidador();
+    boolean encontrado = cuidador.buscarPorCedulaCI(cedulaCI); 
+
+    if (encontrado) {
+        vista.getTxtnombrecuidador().setText(cuidador.getNombre());
+        vista.getTelefonocui().setText(cuidador.getTelefono());
+        vista.getTxtedadcuidador().setText(String.valueOf(cuidador.getEdad()));
+        vista.getTxtturnocuidador().setText(cuidador.getTurno());
+        vista.getTxtespecialidadcuidador().setText(cuidador.getEspecialidad());
+        vista.getTxtcargocuidador().setText(cuidador.getCargo());
+    } else {
+        JOptionPane.showMessageDialog(vista, "Cuidador no encontrado.");
+    }
+}
+
+ if (e.getSource() == vista.getBtactualizarcuidador()) {
+    try {
+        String cedula = vista.getTxtcedulacuidador().getText().trim();
+        String nombre = vista.getTxtnombrecuidador().getText().trim();
+        String telefono = vista.getTelefonocui().getText().trim();
+        int edad = Integer.parseInt(vista.getTxtedadcuidador().getText().trim());
+        String turno = vista.getTxtturnocuidador().getText().trim();
+        String especialidad = vista.getTxtespecialidadcuidador().getText().trim();
+        String cargo = vista.getTxtcargocuidador().getText().trim();
+
+        Cuidador c = new Cuidador();
+        c.setCedula(cedula);
+        c.setNombre(nombre);
+        c.setTelefono(telefono);
+        c.setEdad(edad);
+        c.setTurno(turno);
+        c.setEspecialidad(especialidad);
+        c.setCargo(cargo);
+
+        c.actualizarCuidador(cedula); // ← ya lo tienes en tu modelo
+
+        JOptionPane.showMessageDialog(vista, "Datos del cuidador actualizados correctamente.");
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al actualizar cuidador: " + ex.getMessage());
+    }
+}
+
  
-        if (e.getSource() == vista.getBotonregistromascota()) {
+if (e.getSource() == vista.getBotonregistromascota()) {
             try {
                 int id = Integer.parseInt(vista.getTxtidentifiacionmascota().getText());
                 String cedulaPropietario = vista.getTxtcedulamascota().getText();
@@ -97,26 +194,13 @@ public class ControladorFinal implements ActionListener {
         }
 
   
-       
-
-        if (e.getSource() == vista.getBotonactualizacion()) {
-        
-            JOptionPane.showMessageDialog(vista, "Función de actualización pendiente");
-        }
-
-        if (e.getSource() == vista.getBotonbuscaractualizacion()) {
-    
-            JOptionPane.showMessageDialog(vista, "Función de búsqueda pendiente");
-        }
-
-        if (e.getSource() == vista.getBotonfactura()) {
-    
-            JOptionPane.showMessageDialog(vista, "Función de facturación pendiente");
-        }
-    }
-    
-    
-    
-    
-    
 }
+
+
+
+
+   
+        
+    }
+   
+

@@ -20,7 +20,7 @@ public class ConectarBD
         {
           System.out.println("No se pudo crear el puente JDBC-ODBC.");
         }
-        String ruta = "jdbc:mysql://localhost:3306/guarderia_canina";
+        String ruta = "jdbc:mysql://localhost:3306/mydb";
         try 
         {
             conexion = DriverManager.getConnection(ruta, "root", "123456");
