@@ -153,8 +153,4 @@ public void crearMascota() {
             }
         }
     }
-    
-
-
-    
 }
