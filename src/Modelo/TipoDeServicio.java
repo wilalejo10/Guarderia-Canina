@@ -15,7 +15,6 @@ public class TipoDeServicio {
         this.costoUnidad = costoUnidad;
     }
 
-    // Getters y Setters
     public int getIdTipoServicio() {
         return idTipoServicio;
     }
