@@ -7,18 +7,18 @@ import Modelo.Propietario;
 import Modelo.Cuidador;
 import Modelo.Mascota;
 import Modelo.Servicio;
-import Modelo.Factura;
+import javax.swing.table.DefaultTableModel;
+import modelo.FacturaPDF;
 
 public class ControladorFinal implements ActionListener {
     Formulario vista;
     Propietario modelo;
-
+    Object[][] servicios;
     public ControladorFinal() {
         vista = new Formulario();
         vista.setVisible(true);
         vista.getBotonregistrocliente().addActionListener(this);
         vista.getBotonactualizacion().addActionListener(this);
-        vista.getBotonfactura().addActionListener(this);
         vista.getBTgenerarFactura().addActionListener(this);
         vista.getBotonbuscaractualizacion().addActionListener(this);
         vista.getBotonregistrocuidador().addActionListener(this);
@@ -26,8 +26,9 @@ public class ControladorFinal implements ActionListener {
         vista.getBotonservicio().addActionListener(this);
         vista.getBtactualizarcuidador().addActionListener(this);
         vista.getBtBuscarCuidador().addActionListener(this);
-        vista.getBTeliminar().addActionListener(this);
-        vista.getBteliminarRegistroB().addActionListener(this);
+      
+        vista.getActualizarAforo().addActionListener(this);
+        vista.getBTgenerarFactura().addActionListener(this);
     }
 
     @Override
@@ -190,120 +191,59 @@ if (e.getSource() == vista.getBotonregistromascota()) {
         }
 
 if (e.getSource() == vista.getBotonservicio()) {
-    try {
-        String cedulaProp = vista.getTxtcedulaservicio().getText();
-        String nombreServicio = vista.getComboservicio().getSelectedItem().toString();
+   
+     String tipoServicio = vista.getComboservicio().getSelectedItem().toString();
 
-        Servicio servicio = Servicio.obtenerServicioPorNombre(nombreServicio);
+    Servicio servicio = Servicio.obtenerServicioPorNombre(tipoServicio);
 
-        if (servicio == null) {
-            JOptionPane.showMessageDialog(vista, "Servicio no encontrado.");
-            return;
-        }
+    if (servicio == null) {
+        JOptionPane.showMessageDialog(vista, "Servicio no encontrado.");
+        return;
+    }
 
-        if (servicio.getDisponibles() <= 0) {
-            JOptionPane.showMessageDialog(vista, "No hay cupos disponibles para este servicio.");
-            return;
-        }
+    if (servicio.getDisponibles() <= 0) {
+        JOptionPane.showMessageDialog(vista, "No hay cupos disponibles para este servicio.");
+        return;
+    }
 
-        boolean registrado = servicio.registrarServicioSolicitado(cedulaProp, servicio.getIdServicio());
+    boolean exito = servicio.reducirDisponibilidad();
 
-        if (registrado) {
-            int nuevaDisponibilidad = servicio.getDisponibles() - 1;
-            servicio.actualizarDisponibilidad(servicio.getIdServicio(), nuevaDisponibilidad);
+    if (exito) {
+        JOptionPane.showMessageDialog(vista,
+            "Servicio asignado exitosamente.\nDisponibilidad restante: " + servicio.getDisponibles(),
+            "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-            JOptionPane.showMessageDialog(vista, "Servicio registrado y aforo actualizado.");
-        } else {
-            JOptionPane.showMessageDialog(vista, "No se pudo registrar el servicio.");
-        }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(vista, "Error al registrar servicio: " + ex.getMessage());
+    } else {
+        JOptionPane.showMessageDialog(vista, "No se pudo registrar el servicio.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+}
+
+if (e.getSource() == vista.getActualizarAforo()) {
+    Object[][] datos = Servicio.obtenerDatosAforo();
+    if (datos != null) {
+        String[] columnas = {"Servicio", "Disponibles"};
+        DefaultTableModel modelo = new DefaultTableModel(datos, columnas);
+        vista.getTabla_aforo().setModel(modelo);
+    } else {
+        JOptionPane.showMessageDialog(vista, "No se pudo cargar el aforo.");
     }
 }
 
-if (e.getSource() == vista.getBTeliminar()) {
-    try {
-        String cedulaProp = vista.getTxtcedulaservicio().getText();
-        String nombreServicio = vista.getComboservicio().getSelectedItem().toString();
-
-        Servicio servicio = Servicio.obtenerServicioPorNombre(nombreServicio);
-        if (servicio == null) {
-            JOptionPane.showMessageDialog(vista, "Servicio no encontrado.");
-            return;
-        }
-
-        boolean eliminado = servicio.eliminarServicioSolicitado(cedulaProp, servicio.getIdServicio());
-
-        if (eliminado) {
-            int nuevaDisponibilidad = servicio.getDisponibles() + 1;
-            servicio.actualizarDisponibilidad(servicio.getIdServicio(), nuevaDisponibilidad);
-            JOptionPane.showMessageDialog(vista, "Servicio eliminado y aforo actualizado.");
-        } else {
-            JOptionPane.showMessageDialog(vista, "No se pudo eliminar el servicio.");
-        }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(vista, "Error al eliminar servicio: " + ex.getMessage());
-    }
-}
 if (e.getSource() == vista.getBTgenerarFactura()) {
-    try {
-        String idFacturaStr = vista.getTxtconsulta().getText().trim();
-        
-        if (idFacturaStr.isEmpty()) {
-            JOptionPane.showMessageDialog(vista, "Por favor ingrese un ID de factura.");
-            return;
-        }
+    String cedula = vista.getTxtconsulta().getText().trim();
+    String metodo = vista.getCBmetododepago().getSelectedItem().toString();
 
-        int idFactura = Integer.parseInt(idFacturaStr);
-
-        Factura factura = new Factura();
-        factura.reporteFactura(idFactura);
-
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(vista, "ID de factura inválido. Debe ser un número.");
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(vista, "Error al generar la factura: " + ex.getMessage());
-        ex.printStackTrace();
-    }
-}
-
-if (e.getSource() == vista.getBteliminarRegistroB()) {
-    try {
-        String cedula = vista.getTxteliminar().getText().trim();
-        if (cedula.isEmpty()) {
-            JOptionPane.showMessageDialog(vista, "Por favor ingrese la cédula del cliente a eliminar.");
-            return;
-        }
-        Propietario p = new Propietario();
-        p.eliminarCliente(cedula);
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(vista, "Error al eliminar cliente: " + ex.getMessage());
-    }
-}
-
-if (e.getSource() == vista.getBotonbuscarregistro()) {
-    try {
-        String cedula = vista.getTxteliminar().getText().trim();
-        if (cedula.isEmpty()) {
-            JOptionPane.showMessageDialog(vista, "Por favor ingrese una cédula para buscar.");
-            return;
-        }
-
-        String[] datos = new String[4];
-        Propietario p = new Propietario();
-        datos = p.buscarPropietario(cedula, datos);
-
-        vista.getTxtnombre().setText(datos[0]);
-        vista.getTxtdireccion().setText(datos[1]);
-        vista.getTxttelefono().setText(datos[2]);
-        vista.getTxtcorreo().setText(datos[3]);
-
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(vista, "Error al buscar: " + ex.getMessage());
+    if (cedula.isEmpty()) {
+        JOptionPane.showMessageDialog(vista, "Ingrese una cédula válida.");
+        return;
     }
 
-            
+    FacturaPDF.generarFactura(cedula, metodo);
 }
+
+
+
 }
 }
 

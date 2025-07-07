@@ -74,7 +74,35 @@ public class Mascota {
         this.propietarioCedula = propietarioCedula;
     }
 
+    
+public static int obtenerIdMascota(String cedulaProp, String nombreMascota) {
+    int id = -1;
+    try {
+        ConectarBD conexion = new ConectarBD();
+        Statement stmt = conexion.getConexion().createStatement();
+        String sql = "SELECT idMascota FROM mascota " +
+                     "WHERE Propietario_cedula = '" + cedulaProp + "' " +
+                     "AND nombre = '" + nombreMascota + "'";
 
+        ResultSet rs = stmt.executeQuery(sql);
+        if (rs.next()) {
+            id = rs.getInt("idMascota");
+        }
+
+        rs.close();
+        stmt.close();
+        conexion.getConexion().close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error obteniendo ID de mascota: " + e.getMessage());
+    }
+    return id;
+}
+
+
+    
+    
+    
+    
 public void crearMascota() {
     try {
         ConectarBD conexion = new ConectarBD();

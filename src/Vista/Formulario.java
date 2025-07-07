@@ -11,16 +11,11 @@ public class Formulario extends javax.swing.JFrame
     public JButton getActualizarAforo() {
         return actualizarAforo;
     }
-    
+
+   
     
 
-    public JButton getBTeliminar() {
-        return BTeliminar;
-    }
 
-    public void setBTeliminar(JButton BTeliminar) {
-        this.BTeliminar = BTeliminar;
-    }
 
     public JButton getBTgenerarFactura() {
         return BTgenerarFactura;
@@ -48,21 +43,6 @@ public class Formulario extends javax.swing.JFrame
 
 
 
-    public JButton getBtactualizarrecaudo() {
-        return Btactualizarrecaudo;
-    }
-
-    public void setBtactualizarrecaudo(JButton Btactualizarrecaudo) {
-        this.Btactualizarrecaudo = Btactualizarrecaudo;
-    }
-
-    public JButton getBteliminarRegistroB() {
-        return botonbuscarregistro;
-    }
-
-    public void setBteliminarRegistroB(JButton BteliminarRegistroB) {
-        this.botonbuscarregistro = BteliminarRegistroB;
-    }
 
     public JComboBox<String> getCBmetododepago() {
         return CBmetododepago;
@@ -72,37 +52,8 @@ public class Formulario extends javax.swing.JFrame
         this.CBmetododepago = CBmetododepago;
     }
 
-    public JTable getTabladerecaudos() {
-        return Tabladerecaudos;
-    }
 
-    public void setTabladerecaudos(JTable Tabladerecaudos) {
-        this.Tabladerecaudos = Tabladerecaudos;
-    }
 
-    public JTextField getTxtEliminarregistro() {
-        return TxtEliminarregistro;
-    }
-
-    public void setTxtEliminarregistro(JTextField TxtEliminarregistro) {
-        this.TxtEliminarregistro = TxtEliminarregistro;
-    }
-
-    public JTextField getMonto_depositado() {
-        return monto_depositado;
-    }
-
-    public void setMonto_depositado(JTextField monto_depositado) {
-        this.monto_depositado = monto_depositado;
-    }
-
-    public JTable getTablaRegistroEL() {
-        return tablaRegistroEL;
-    }
-
-    public void setTablaRegistroEL(JTable tablaRegistroEL) {
-        this.tablaRegistroEL = tablaRegistroEL;
-    }
 
     public JTable getTabla_aforo() {
         return tabla_aforo;
@@ -112,15 +63,6 @@ public class Formulario extends javax.swing.JFrame
         this.tabla_aforo = tabla_aforo;
     }
 
-
-
-    public JTextField getTxtmontoActual() {
-        return txtmontoActual;
-    }
-
-    public void setTxtmontoActual(JTextField txtmontoActual) {
-        this.txtmontoActual = txtmontoActual;
-    }
     
     
     
@@ -129,9 +71,6 @@ public class Formulario extends javax.swing.JFrame
         return telefonocui;
     }
 
-    public JButton getBotonfactura() {
-        return botonfactura;
-    }
 
     public JButton getBotonbuscaractualizacion() {
         return botonbuscaractualizacion;
@@ -181,9 +120,6 @@ public class Formulario extends javax.swing.JFrame
         return comboservicio;
     }
 
-    public JTable getTablaconsulta() {
-        return tablaconsulta;
-    }
 
     public JTextField getTxtactualizacioncorreo() {
         return txtactualizacioncorreo;
@@ -242,10 +178,6 @@ public class Formulario extends javax.swing.JFrame
         return txtedadmascota;
     }
 
-    public JTextField getTxteliminar() {
-        return txteliminar;
-    }
-
     public JTextField getTxtespecialidadcuidador() {
         return txtespecialidadcuidador;
     }
@@ -278,13 +210,6 @@ public class Formulario extends javax.swing.JFrame
         return txtturnocuidador;
     }
 
-    public JButton getBotonbuscarregistro() {
-        return botonbuscarregistro;
-    }
-
-    public JButton getBotoneliminarregistro() {
-        return botoneliminarregistro;
-    }
     
     
     
@@ -311,34 +236,6 @@ public class Formulario extends javax.swing.JFrame
         txtcorreo = new javax.swing.JTextField();
         txtdireccion = new javax.swing.JTextField();
         txttelefono = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        txteliminar = new javax.swing.JTextField();
-        botonbuscarregistro = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tablaRegistroEL = new javax.swing.JTable();
-        jLabel40 = new javax.swing.JLabel();
-        TxtEliminarregistro = new javax.swing.JTextField();
-        BTeliminar = new javax.swing.JButton();
-        botoneliminarregistro = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        txtconsulta = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaconsulta = new javax.swing.JTable();
-        botonfactura = new javax.swing.JButton();
-        jLabel29 = new javax.swing.JLabel();
-        CBmetododepago = new javax.swing.JComboBox<>();
-        jLabel36 = new javax.swing.JLabel();
-        monto_depositado = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        txtmontoActual = new javax.swing.JTextField();
-        BTgenerarFactura = new javax.swing.JButton();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        Btactualizarrecaudo = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        Tabladerecaudos = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         txtcedulaservicio = new javax.swing.JTextField();
@@ -403,6 +300,12 @@ public class Formulario extends javax.swing.JFrame
         jScrollPane4 = new javax.swing.JScrollPane();
         tabla_aforo = new javax.swing.JTable();
         actualizarAforo = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txtconsulta = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        CBmetododepago = new javax.swing.JComboBox<>();
+        BTgenerarFactura = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -487,224 +390,13 @@ public class Formulario extends javax.swing.JFrame
 
         jTabbedPane2.addTab("Registro Cliente", jPanel1);
 
-        jLabel23.setText("Ingrese Cedula del Cliente");
-
-        botonbuscarregistro.setText("buscar");
-
-        tablaRegistroEL.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane6.setViewportView(tablaRegistroEL);
-
-        jLabel40.setText("coloca id del servicio que quieras eliminar");
-
-        BTeliminar.setText("eliminar");
-
-        botoneliminarregistro.setText("Eliminar registro");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(65, 65, 65)
-                                .addComponent(txteliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(botonbuscarregistro))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel40)
-                        .addGap(18, 18, 18)
-                        .addComponent(TxtEliminarregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(317, 317, 317)
-                        .addComponent(BTeliminar))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(288, 288, 288)
-                        .addComponent(botoneliminarregistro)))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(txteliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonbuscarregistro))
-                .addGap(18, 18, 18)
-                .addComponent(botoneliminarregistro)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40)
-                    .addComponent(TxtEliminarregistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(BTeliminar)
-                .addContainerGap(149, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Eliminar registro", jPanel4);
-
-        jLabel6.setText("Ingrese la Cedula del Cliente");
-
-        jScrollPane1.setViewportView(tablaconsulta);
-
-        botonfactura.setText("buscar");
-        botonfactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonfacturaActionPerformed(evt);
-            }
-        });
-
-        jLabel29.setText("metodo de pago");
-
-        CBmetododepago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "efectivo ", "tarjeta ", "nequi", "daviplata" }));
-
-        jLabel36.setText("monto a deapositar");
-
-        jLabel37.setText("monto actual");
-
-        BTgenerarFactura.setText("generar factura");
-
-        jLabel38.setText("mascotas y servicios dados");
-
-        jLabel39.setText("Recaudos dados");
-
-        Btactualizarrecaudo.setText("actualizar");
-        Btactualizarrecaudo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtactualizarrecaudoActionPerformed(evt);
-            }
-        });
-
-        Tabladerecaudos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane5.setViewportView(Tabladerecaudos);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(botonfactura))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(40, 40, 40)
-                                .addComponent(txtconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel29)
-                                    .addComponent(jLabel36)
-                                    .addComponent(jLabel37))
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CBmetododepago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(monto_depositado)
-                                    .addComponent(txtmontoActual, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                                .addGap(34, 34, 34)
-                                .addComponent(Btactualizarrecaudo))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jLabel39))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel38))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(BTgenerarFactura)
-                        .addGap(67, 67, 67))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel38)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
-                        .addComponent(BTgenerarFactura))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(botonfactura)
-                        .addGap(13, 13, 13)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel29)
-                            .addComponent(CBmetododepago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel36)
-                                    .addComponent(monto_depositado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(Btactualizarrecaudo)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel37)
-                            .addComponent(txtmontoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel39)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Factura", jPanel2);
-
         jLabel15.setText("Ingresar Cedula Propietario");
 
         jLabel16.setText("Nombre de la Mascota");
 
         jLabel4.setText("Seleccione un servicio");
 
-        comboservicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospedaje", "Recreacion", "Restaurante", "SPA", "Gimnasio", "Piscina", "Peluqueria" }));
+        comboservicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospedaje", "Recreacion", "Restaurante", "SPA", " " }));
         comboservicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboservicioActionPerformed(evt);
@@ -1113,6 +805,58 @@ public class Formulario extends javax.swing.JFrame
 
         jTabbedPane2.addTab("aforo", jPanel8);
 
+        jLabel6.setText("Ingrese la Cedula del Cliente");
+
+        txtconsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtconsultaActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setText("metodo de pago");
+
+        CBmetododepago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "efectivo ", "tarjeta ", "nequi", "daviplata" }));
+
+        BTgenerarFactura.setText("generar factura");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel6)
+                        .addGap(40, 40, 40)
+                        .addComponent(txtconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel29)
+                        .addGap(123, 123, 123)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BTgenerarFactura)
+                            .addComponent(CBmetododepago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(67, 338, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CBmetododepago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addGap(57, 57, 57)
+                .addComponent(BTgenerarFactura)
+                .addContainerGap(408, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Factura", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1133,21 +877,17 @@ public class Formulario extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtturnocuidadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtturnocuidadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtturnocuidadorActionPerformed
+
     private void comboservicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboservicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboservicioActionPerformed
 
-    private void botonfacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonfacturaActionPerformed
+    private void txtconsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtconsultaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonfacturaActionPerformed
-
-    private void BtactualizarrecaudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtactualizarrecaudoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtactualizarrecaudoActionPerformed
-
-    private void txtturnocuidadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtturnocuidadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtturnocuidadorActionPerformed
+    }//GEN-LAST:event_txtconsultaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1186,20 +926,13 @@ public class Formulario extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTeliminar;
     private javax.swing.JButton BTgenerarFactura;
     private javax.swing.JButton BtBuscarCuidador;
     private javax.swing.JButton Btactualizarcuidador;
-    private javax.swing.JButton Btactualizarrecaudo;
     private javax.swing.JComboBox<String> CBmetododepago;
-    private javax.swing.JTable Tabladerecaudos;
-    private javax.swing.JTextField TxtEliminarregistro;
     private javax.swing.JButton actualizarAforo;
     private javax.swing.JButton botonactualizacion;
     private javax.swing.JButton botonbuscaractualizacion;
-    private javax.swing.JButton botonbuscarregistro;
-    private javax.swing.JButton botoneliminarregistro;
-    private javax.swing.JButton botonfactura;
     private javax.swing.JButton botonregistrocliente;
     private javax.swing.JButton botonregistrocuidador;
     private javax.swing.JButton botonregistromascota;
@@ -1221,7 +954,6 @@ public class Formulario extends javax.swing.JFrame
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1233,12 +965,7 @@ public class Formulario extends javax.swing.JFrame
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1247,24 +974,17 @@ public class Formulario extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField monto_depositado;
-    private javax.swing.JTable tablaRegistroEL;
     private javax.swing.JTable tabla_aforo;
-    private javax.swing.JTable tablaconsulta;
     private javax.swing.JTextField telefonocui;
     private javax.swing.JTextField txtactualizacioncorreo;
     private javax.swing.JTextField txtactualizaciondireccion;
@@ -1281,11 +1001,9 @@ public class Formulario extends javax.swing.JFrame
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JTextField txtedadcuidador;
     private javax.swing.JTextField txtedadmascota;
-    private javax.swing.JTextField txteliminar;
     private javax.swing.JTextField txtespecialidadcuidador;
     private javax.swing.JTextField txtidentifiacionmascota;
     private javax.swing.JTextField txtmascotaservicio;
-    private javax.swing.JTextField txtmontoActual;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtnombrecuidador;
     private javax.swing.JTextField txtnombremascota;
