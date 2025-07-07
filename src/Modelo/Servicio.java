@@ -108,6 +108,41 @@ public class Servicio {
         }
         return s;
     }
+    
+    public boolean registrarServicioSolicitado(String cedulaPropietario, int idServicio) {
+    try {
+        ConectarBD conexion = new ConectarBD();
+        String sql = "INSERT INTO servicios_solicitados (cedula_propietario, id_servicio) VALUES (?, ?)";
+        PreparedStatement stmt = conexion.getConexion().prepareStatement(sql);
+        stmt.setString(1, cedulaPropietario);
+        stmt.setInt(2, idServicio);
+        stmt.executeUpdate();
+        stmt.close();
+        conexion.getConexion().close();
+        return true;
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al registrar servicio solicitado: " + e.getMessage());
+        return false;
+    }
+}
+    
+    public boolean eliminarServicioSolicitado(String cedulaPropietario, int idServicio) {
+    try {
+        ConectarBD conexion = new ConectarBD();
+        String sql = "DELETE FROM servicios_solicitados WHERE cedula_propietario = ? AND id_servicio = ?";
+        PreparedStatement stmt = conexion.getConexion().prepareStatement(sql);
+        stmt.setString(1, cedulaPropietario);
+        stmt.setInt(2, idServicio);
+        stmt.executeUpdate();
+        stmt.close();
+        conexion.getConexion().close();
+        return true;
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al eliminar servicio solicitado: " + e.getMessage());
+        return false;
+    }
+}
+
 }
 
 

@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
-
 import Vista.Formulario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,24 +7,27 @@ import Modelo.Propietario;
 import Modelo.Cuidador;
 import Modelo.Mascota;
 import Modelo.Servicio;
+import Modelo.Factura;
 
 public class ControladorFinal implements ActionListener {
     Formulario vista;
+    Propietario modelo;
 
     public ControladorFinal() {
         vista = new Formulario();
         vista.setVisible(true);
-
-     
         vista.getBotonregistrocliente().addActionListener(this);
         vista.getBotonactualizacion().addActionListener(this);
         vista.getBotonfactura().addActionListener(this);
+        vista.getBTgenerarFactura().addActionListener(this);
         vista.getBotonbuscaractualizacion().addActionListener(this);
         vista.getBotonregistrocuidador().addActionListener(this);
         vista.getBotonregistromascota().addActionListener(this);
         vista.getBotonservicio().addActionListener(this);
         vista.getBtactualizarcuidador().addActionListener(this);
         vista.getBtBuscarCuidador().addActionListener(this);
+        vista.getBTeliminar().addActionListener(this);
+        vista.getBteliminarRegistroB().addActionListener(this);
     }
 
     @Override
@@ -155,7 +153,6 @@ if (e.getSource() == vista.getBtBuscarCuidador()) {
         String turno = vista.getTxtturnocuidador().getText().trim();
         String especialidad = vista.getTxtespecialidadcuidador().getText().trim();
         String cargo = vista.getTxtcargocuidador().getText().trim();
-
         Cuidador c = new Cuidador();
         c.setCedula(cedula);
         c.setNombre(nombre);
@@ -164,8 +161,7 @@ if (e.getSource() == vista.getBtBuscarCuidador()) {
         c.setTurno(turno);
         c.setEspecialidad(especialidad);
         c.setCargo(cargo);
-
-        c.actualizarCuidador(cedula); // ← ya lo tienes en tu modelo
+        c.actualizarCuidador(cedula);
 
         JOptionPane.showMessageDialog(vista, "Datos del cuidador actualizados correctamente.");
 
@@ -193,14 +189,121 @@ if (e.getSource() == vista.getBotonregistromascota()) {
             }
         }
 
-  
+if (e.getSource() == vista.getBotonservicio()) {
+    try {
+        String cedulaProp = vista.getTxtcedulaservicio().getText();
+        String nombreServicio = vista.getComboservicio().getSelectedItem().toString();
+
+        Servicio servicio = Servicio.obtenerServicioPorNombre(nombreServicio);
+
+        if (servicio == null) {
+            JOptionPane.showMessageDialog(vista, "Servicio no encontrado.");
+            return;
+        }
+
+        if (servicio.getDisponibles() <= 0) {
+            JOptionPane.showMessageDialog(vista, "No hay cupos disponibles para este servicio.");
+            return;
+        }
+
+        boolean registrado = servicio.registrarServicioSolicitado(cedulaProp, servicio.getIdServicio());
+
+        if (registrado) {
+            int nuevaDisponibilidad = servicio.getDisponibles() - 1;
+            servicio.actualizarDisponibilidad(servicio.getIdServicio(), nuevaDisponibilidad);
+
+            JOptionPane.showMessageDialog(vista, "Servicio registrado y aforo actualizado.");
+        } else {
+            JOptionPane.showMessageDialog(vista, "No se pudo registrar el servicio.");
+        }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al registrar servicio: " + ex.getMessage());
+    }
 }
 
+if (e.getSource() == vista.getBTeliminar()) {
+    try {
+        String cedulaProp = vista.getTxtcedulaservicio().getText();
+        String nombreServicio = vista.getComboservicio().getSelectedItem().toString();
 
+        Servicio servicio = Servicio.obtenerServicioPorNombre(nombreServicio);
+        if (servicio == null) {
+            JOptionPane.showMessageDialog(vista, "Servicio no encontrado.");
+            return;
+        }
 
+        boolean eliminado = servicio.eliminarServicioSolicitado(cedulaProp, servicio.getIdServicio());
 
-   
-        
+        if (eliminado) {
+            int nuevaDisponibilidad = servicio.getDisponibles() + 1;
+            servicio.actualizarDisponibilidad(servicio.getIdServicio(), nuevaDisponibilidad);
+            JOptionPane.showMessageDialog(vista, "Servicio eliminado y aforo actualizado.");
+        } else {
+            JOptionPane.showMessageDialog(vista, "No se pudo eliminar el servicio.");
+        }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al eliminar servicio: " + ex.getMessage());
     }
-   
+}
+if (e.getSource() == vista.getBTgenerarFactura()) {
+    try {
+        String idFacturaStr = vista.getTxtconsulta().getText().trim();
+        
+        if (idFacturaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(vista, "Por favor ingrese un ID de factura.");
+            return;
+        }
+
+        int idFactura = Integer.parseInt(idFacturaStr);
+
+        Factura factura = new Factura();
+        factura.reporteFactura(idFactura);
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(vista, "ID de factura inválido. Debe ser un número.");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al generar la factura: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
+
+if (e.getSource() == vista.getBteliminarRegistroB()) {
+    try {
+        String cedula = vista.getTxteliminar().getText().trim();
+        if (cedula.isEmpty()) {
+            JOptionPane.showMessageDialog(vista, "Por favor ingrese la cédula del cliente a eliminar.");
+            return;
+        }
+        Propietario p = new Propietario();
+        p.eliminarCliente(cedula);
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al eliminar cliente: " + ex.getMessage());
+    }
+}
+
+if (e.getSource() == vista.getBotonbuscarregistro()) {
+    try {
+        String cedula = vista.getTxteliminar().getText().trim();
+        if (cedula.isEmpty()) {
+            JOptionPane.showMessageDialog(vista, "Por favor ingrese una cédula para buscar.");
+            return;
+        }
+
+        String[] datos = new String[4];
+        Propietario p = new Propietario();
+        datos = p.buscarPropietario(cedula, datos);
+
+        vista.getTxtnombre().setText(datos[0]);
+        vista.getTxtdireccion().setText(datos[1]);
+        vista.getTxttelefono().setText(datos[2]);
+        vista.getTxtcorreo().setText(datos[3]);
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(vista, "Error al buscar: " + ex.getMessage());
+    }
+
+            
+}
+}
+}
 

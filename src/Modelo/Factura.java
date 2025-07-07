@@ -4,6 +4,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import javax.swing.JOptionPane;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.io.*;
+import java.awt.Desktop;
+import java.sql.*;
+
 
 public class Factura {
      int idFactura;
@@ -122,4 +128,66 @@ public class Factura {
             JOptionPane.showMessageDialog(null, "Error SQL: " + e);
         }
     }
+    public void reporteFactura(int idFactura) {
+    Document documento = new Document();
+    ConectarBD conexion = new ConectarBD();
+    try {
+        String nombreArchivo = "Factura_" + idFactura + ".pdf";
+        PdfWriter.getInstance(documento, new FileOutputStream(nombreArchivo));
+        documento.open();
+
+        Paragraph titulo = new Paragraph("REPORTE DE FACTURA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLACK));
+        titulo.setAlignment(Element.ALIGN_CENTER);
+        documento.add(titulo);
+        documento.add(new Paragraph(" ")); // Espacio
+
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement("SELECT * FROM Factura WHERE idFactura = ?");
+        sentencia.setInt(1, idFactura);
+        ResultSet resultado = sentencia.executeQuery();
+
+        if (resultado.next()) {
+            PdfPTable tabla = new PdfPTable(2);
+            tabla.setWidthPercentage(70);
+            tabla.setSpacingBefore(10f);
+            tabla.setSpacingAfter(10f);
+            tabla.addCell("ID Factura:");
+            tabla.addCell(String.valueOf(resultado.getInt("idFactura")));
+
+            tabla.addCell("Fecha de Pago:");
+            tabla.addCell(resultado.getString("fechaPago"));
+
+            tabla.addCell("Monto Pagado:");
+            tabla.addCell("$" + resultado.getDouble("montoPagado"));
+
+            tabla.addCell("Método de Pago:");
+            tabla.addCell(resultado.getString("metodoPago"));
+
+            tabla.addCell("ID Reserva:");
+            tabla.addCell(String.valueOf(resultado.getInt("idReserva")));
+
+            documento.add(tabla);
+        } else {
+            documento.add(new Paragraph("No se encontró la factura con ID: " + idFactura));
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al generar el PDF: " + e);
+        e.printStackTrace();
+    } finally {
+        documento.close();
+        try {
+            conexion.getConexion().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    try {
+        File archivo = new File("Factura_" + idFactura + ".pdf");
+        if (archivo.exists()) {
+            Desktop.getDesktop().open(archivo);
+        }
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
 }

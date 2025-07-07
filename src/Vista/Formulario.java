@@ -57,11 +57,11 @@ public class Formulario extends javax.swing.JFrame
     }
 
     public JButton getBteliminarRegistroB() {
-        return BteliminarRegistroB;
+        return botonbuscarregistro;
     }
 
     public void setBteliminarRegistroB(JButton BteliminarRegistroB) {
-        this.BteliminarRegistroB = BteliminarRegistroB;
+        this.botonbuscarregistro = BteliminarRegistroB;
     }
 
     public JComboBox<String> getCBmetododepago() {
@@ -277,6 +277,16 @@ public class Formulario extends javax.swing.JFrame
     public JTextField getTxtturnocuidador() {
         return txtturnocuidador;
     }
+
+    public JButton getBotonbuscarregistro() {
+        return botonbuscarregistro;
+    }
+
+    public JButton getBotoneliminarregistro() {
+        return botoneliminarregistro;
+    }
+    
+    
     
     
     public Formulario() {
@@ -304,12 +314,13 @@ public class Formulario extends javax.swing.JFrame
         jPanel4 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         txteliminar = new javax.swing.JTextField();
-        BteliminarRegistroB = new javax.swing.JButton();
+        botonbuscarregistro = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tablaRegistroEL = new javax.swing.JTable();
         jLabel40 = new javax.swing.JLabel();
         TxtEliminarregistro = new javax.swing.JTextField();
         BTeliminar = new javax.swing.JButton();
+        botoneliminarregistro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtconsulta = new javax.swing.JTextField();
@@ -478,7 +489,7 @@ public class Formulario extends javax.swing.JFrame
 
         jLabel23.setText("Ingrese Cedula del Cliente");
 
-        BteliminarRegistroB.setText("buscar");
+        botonbuscarregistro.setText("buscar");
 
         tablaRegistroEL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -497,6 +508,8 @@ public class Formulario extends javax.swing.JFrame
 
         BTeliminar.setText("eliminar");
 
+        botoneliminarregistro.setText("Eliminar registro");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -506,20 +519,24 @@ public class Formulario extends javax.swing.JFrame
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel40)
-                                .addGap(18, 18, 18)
-                                .addComponent(TxtEliminarregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel23)
                                 .addGap(65, 65, 65)
                                 .addComponent(txteliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(BteliminarRegistroB))))
+                                .addComponent(botonbuscarregistro))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(321, 321, 321)
-                        .addComponent(BTeliminar)))
+                        .addContainerGap()
+                        .addComponent(jLabel40)
+                        .addGap(18, 18, 18)
+                        .addComponent(TxtEliminarregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(317, 317, 317)
+                        .addComponent(BTeliminar))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(288, 288, 288)
+                        .addComponent(botoneliminarregistro)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -529,16 +546,18 @@ public class Formulario extends javax.swing.JFrame
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
                     .addComponent(txteliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BteliminarRegistroB))
+                    .addComponent(botonbuscarregistro))
                 .addGap(18, 18, 18)
+                .addComponent(botoneliminarregistro)
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
                     .addComponent(TxtEliminarregistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addComponent(BTeliminar)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Eliminar registro", jPanel4);
@@ -622,7 +641,7 @@ public class Formulario extends javax.swing.JFrame
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,7 +770,7 @@ public class Formulario extends javax.swing.JFrame
                             .addComponent(jLabel4))
                         .addGap(48, 48, 48)
                         .addComponent(botonservicio))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addComponent(jScrollPane3))
                 .addContainerGap(350, Short.MAX_VALUE))
         );
@@ -1020,9 +1039,8 @@ public class Formulario extends javax.swing.JFrame
                     .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel32)
-                        .addComponent(jLabel18))
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel32)
                     .addComponent(txtnombrecuidador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1100,7 +1118,7 @@ public class Formulario extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addContainerGap()
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1173,13 +1191,14 @@ public class Formulario extends javax.swing.JFrame
     private javax.swing.JButton BtBuscarCuidador;
     private javax.swing.JButton Btactualizarcuidador;
     private javax.swing.JButton Btactualizarrecaudo;
-    private javax.swing.JButton BteliminarRegistroB;
     private javax.swing.JComboBox<String> CBmetododepago;
     private javax.swing.JTable Tabladerecaudos;
     private javax.swing.JTextField TxtEliminarregistro;
     private javax.swing.JButton actualizarAforo;
     private javax.swing.JButton botonactualizacion;
     private javax.swing.JButton botonbuscaractualizacion;
+    private javax.swing.JButton botonbuscarregistro;
+    private javax.swing.JButton botoneliminarregistro;
     private javax.swing.JButton botonfactura;
     private javax.swing.JButton botonregistrocliente;
     private javax.swing.JButton botonregistrocuidador;
