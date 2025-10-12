@@ -74,7 +74,7 @@ public class Servicio {
                                             ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = stmt.executeQuery();
 
-        // Obtener cantidad de filas
+        
         rs.last();
         int filas = rs.getRow();
         rs.beforeFirst();
@@ -98,34 +98,42 @@ public class Servicio {
 }
     
     
-    public static Servicio obtenerServicioPorNombre(String nombreServicio) {
-        Servicio s = null;
-        try {
-            ConectarBD conexion = new ConectarBD();
-            String sql = "SELECT s.idservicio, s.aforoMaximo, s.disponibles, t.tipoServicio " +
-                         "FROM servicio s " +
-                         "JOIN tipodeservicio t ON s.idTipoServicio = t.idTipoServicio " +
-                         "WHERE t.tipoServicio = ?";
-            PreparedStatement stmt = conexion.getConexion().prepareStatement(sql);
-            stmt.setString(1, nombreServicio);
-            ResultSet rs = stmt.executeQuery();
+public static Servicio obtenerServicioPorNombre(String nombreServicio, int idMascota) {
+    Servicio s = null;
+    try {
+        ConectarBD conexion = new ConectarBD();
+        String sql = "SELECT s.idservicio, s.aforoMaximo, s.disponibles, t.tipoServicio " +
+                     "FROM servicio s " +
+                     "JOIN tipodeservicio t ON s.idTipoServicio = t.idTipoServicio " +
+                     "WHERE t.tipoServicio = ?";
+        PreparedStatement stmt = conexion.getConexion().prepareStatement(sql);
+        stmt.setString(1, nombreServicio);
+        ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                s = new Servicio();
-                s.idServicio = rs.getInt("idservicio");
-                s.aforoMaximo = rs.getInt("aforoMaximo");
-                s.disponibles = rs.getInt("disponibles");
-                s.tipo = rs.getString("tipoServicio");
-            }
+        if (rs.next()) {
+            s = new Servicio();
+            s.idServicio = rs.getInt("idservicio");
+            s.aforoMaximo = rs.getInt("aforoMaximo");
+            s.disponibles = rs.getInt("disponibles");
+            s.tipo = rs.getString("tipoServicio");
 
-            rs.close();
-            stmt.close();
-            conexion.getConexion().close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener servicio: " + e.getMessage());
+            String insertSql = "INSERT INTO servicios_solicitados (id_mascota, id_servicio) VALUES (?, ?)";
+            PreparedStatement insertStmt = conexion.getConexion().prepareStatement(insertSql);
+            insertStmt.setInt(1, idMascota);
+            insertStmt.setInt(2, s.idServicio);
+            insertStmt.executeUpdate();
+            insertStmt.close();
         }
-        return s;
+
+        rs.close();
+        stmt.close();
+        conexion.getConexion().close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al obtener o registrar servicio solicitado: " + e.getMessage());
     }
+    return s;
+}
+
 
     
     public boolean reducirDisponibilidad() {

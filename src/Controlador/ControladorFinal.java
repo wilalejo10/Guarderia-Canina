@@ -51,6 +51,12 @@ if (e.getSource() == vista.getBotonregistrocliente()) {
                 propietario.crearPropietario();
 
                 JOptionPane.showMessageDialog(vista, "Propietario registrado correctamente");
+                
+                        vista.getTxtnombre().setText("");
+                        vista.getTxtcedularegistrocliente().setText("");
+                        vista.getTxtcorreo().setText("");
+                        vista.getTxtdireccion().setText("");
+                        vista.getTxttelefono().setText("");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(vista, "Error al registrar: " + ex.getMessage());
             }
@@ -191,10 +197,23 @@ if (e.getSource() == vista.getBotonregistromascota()) {
         }
 
 if (e.getSource() == vista.getBotonservicio()) {
-   
-     String tipoServicio = vista.getComboservicio().getSelectedItem().toString();
 
-    Servicio servicio = Servicio.obtenerServicioPorNombre(tipoServicio);
+    String tipoServicio = vista.getComboservicio().getSelectedItem().toString();
+    String nombreMascota = vista.getTxtmascotaservicio().getText().trim();
+
+    if (nombreMascota.isEmpty()) {
+        JOptionPane.showMessageDialog(vista, "Por favor, ingresa el nombre de la mascota.");
+        return;
+    }
+
+    int idMascota = Mascota.obtenerIdPorNombre(nombreMascota);
+
+    if (idMascota == -1) {
+        JOptionPane.showMessageDialog(vista, "Mascota no encontrada.");
+        return;
+    }
+
+    Servicio servicio = Servicio.obtenerServicioPorNombre(tipoServicio, idMascota);
 
     if (servicio == null) {
         JOptionPane.showMessageDialog(vista, "Servicio no encontrado.");
@@ -216,8 +235,9 @@ if (e.getSource() == vista.getBotonservicio()) {
     } else {
         JOptionPane.showMessageDialog(vista, "No se pudo registrar el servicio.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
 }
+
+
 
 if (e.getSource() == vista.getActualizarAforo()) {
     Object[][] datos = Servicio.obtenerDatosAforo();

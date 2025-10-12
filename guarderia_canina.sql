@@ -6,6 +6,7 @@ CREATE TABLE Propietario (
   cedula VARCHAR(20) NOT NULL,
   nombre VARCHAR(45) NOT NULL,
   correo VARCHAR(45),
+  direccion varchar(20),
   telefono VARCHAR(20),
   PRIMARY KEY (cedula)
 );

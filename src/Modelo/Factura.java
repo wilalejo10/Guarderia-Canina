@@ -139,7 +139,7 @@ public class Factura {
         Paragraph titulo = new Paragraph("REPORTE DE FACTURA", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLACK));
         titulo.setAlignment(Element.ALIGN_CENTER);
         documento.add(titulo);
-        documento.add(new Paragraph(" ")); // Espacio
+        documento.add(new Paragraph(" "));
 
         PreparedStatement sentencia = conexion.getConexion().prepareStatement("SELECT * FROM Factura WHERE idFactura = ?");
         sentencia.setInt(1, idFactura);

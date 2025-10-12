@@ -16,13 +16,13 @@ public class FacturaPDF {
             PdfWriter.getInstance(documento, new FileOutputStream(ruta));
             documento.open();
 
-            // Título
+           
             Paragraph titulo = new Paragraph("FACTURA - Guardería Canina", FontFactory.getFont("Arial", 20, Font.BOLD));
             titulo.setAlignment(Element.ALIGN_CENTER);
             documento.add(titulo);
-            documento.add(new Paragraph(" ")); // línea en blanco
+            documento.add(new Paragraph(" ")); 
 
-            // Datos del propietario
+            
             ConectarBD conexion = new ConectarBD();
             String sqlProp = "SELECT nombre, direccion, telefono, correo FROM propietario WHERE cedula=?";
             PreparedStatement stmt = conexion.getConexion().prepareStatement(sqlProp);
@@ -44,7 +44,7 @@ public class FacturaPDF {
             rs.close();
             stmt.close();
 
-            // Tabla de servicios
+            
             documento.add(new Paragraph("Servicios Prestados:", FontFactory.getFont("Arial", 14, Font.BOLD)));
 
             PdfPTable tabla = new PdfPTable(3);
@@ -79,7 +79,6 @@ public class FacturaPDF {
             documento.add(tabla);
             documento.add(new Paragraph(" "));
 
-            // Total y método de pago
             documento.add(new Paragraph("Método de pago: " + metodoPago));
             documento.add(new Paragraph("Total a pagar: $" + total + " COP", FontFactory.getFont("Arial", 12, Font.BOLD)));
 

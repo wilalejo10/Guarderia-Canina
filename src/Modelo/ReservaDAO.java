@@ -16,7 +16,6 @@ public class ReservaDAO {
         try {
             ConectarBD conexion = new ConectarBD();
 
-            // 1. Obtener ID de la mascota
             String sqlMascota = "SELECT idMascota FROM mascota WHERE Propietario_cedula = ? AND nombre = ?";
             PreparedStatement stmtMascota = conexion.getConexion().prepareStatement(sqlMascota);
             stmtMascota.setString(1, cedula);
@@ -31,8 +30,6 @@ public class ReservaDAO {
             int idMascota = rsMascota.getInt("idMascota");
             rsMascota.close();
             stmtMascota.close();
-
-            // 2. Obtener reserva activa (sin fecha de fin)
             String sqlReserva = "SELECT idReserva FROM reserva WHERE mascota_idMascota = ? AND fecharfin IS NULL";
             PreparedStatement stmtReserva = conexion.getConexion().prepareStatement(sqlReserva);
             stmtReserva.setInt(1, idMascota);
@@ -47,14 +44,12 @@ public class ReservaDAO {
             rsReserva.close();
             stmtReserva.close();
 
-            // 3. Actualizar la fecha de finalización (a la fecha y hora actual)
             String sqlFinalizar = "UPDATE reserva SET fecharfin = NOW() WHERE idReserva = ?";
             PreparedStatement stmtFin = conexion.getConexion().prepareStatement(sqlFinalizar);
             stmtFin.setInt(1, idReserva);
             stmtFin.executeUpdate();
             stmtFin.close();
 
-            // 4. Obtener el ID del servicio relacionado
             String sqlDetalle = "SELECT servicio_idservicio FROM detalle_de_reserva WHERE Reserva_idReserva = ?";
             PreparedStatement stmtDetalle = conexion.getConexion().prepareStatement(sqlDetalle);
             stmtDetalle.setInt(1, idReserva);
@@ -65,7 +60,6 @@ public class ReservaDAO {
                 rsDetalle.close();
                 stmtDetalle.close();
 
-                // 5. Aumentar la disponibilidad del servicio
                 String sqlActualizar = "UPDATE servicio SET disponibles = disponibles + 1 WHERE idservicio = ?";
                 PreparedStatement stmtActualizar = conexion.getConexion().prepareStatement(sqlActualizar);
                 stmtActualizar.setInt(1, idServicio);

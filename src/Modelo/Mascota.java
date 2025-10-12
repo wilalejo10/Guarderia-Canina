@@ -194,6 +194,30 @@ public void crearMascota() {
 }
 
     
+    public static int obtenerIdPorNombre(String nombre) {
+    int id = -1;
+    try {
+        ConectarBD conexion = new ConectarBD();
+        Statement stmt = conexion.getConexion().createStatement();
+       
+        String sql = "SELECT idMascota FROM mascota WHERE nombre = '" + nombre + "'";
+        
+        ResultSet rs = stmt.executeQuery(sql);
+
+        if (rs.next()) {
+            id = rs.getInt("idMascota");
+        }
+
+        rs.close();
+        stmt.close();
+        conexion.getConexion().close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al obtener ID de mascota: " + e.getMessage());
+    }
+    return id;
+}
+
+    
     
 
     public void eliminarMascota(int id) {
